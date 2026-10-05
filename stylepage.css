@@ -1,1 +1,60 @@
+/* EF
+Global styling for entire website.
+External CSS is used to maintain consistency
+across pages.
+*/
 
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#f4f4f4;
+}
+
+header{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+nav{
+    background:#222;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    justify-content:center;
+    margin:0;
+    padding:0;
+}
+
+nav li{
+    margin:0 15px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    padding:15px;
+    display:block;
+}
+
+nav a:hover{
+    background:#0066cc;
+}
+
+main{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:20px;
+}
+
+footer{
+    background:#003366;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+`
