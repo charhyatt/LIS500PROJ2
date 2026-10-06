@@ -1,60 +1,50 @@
-/* EF
-Global styling for entire website.
-External CSS is used to maintain consistency
-across pages.
-*/
+
+/*Main stylesheet for the website EF*/
 
 body{
-    font-family: Arial, sans-serif;
+    background-color:#f2f2f2;
+    font-family:Arial;
     margin:0;
-    background:#f4f4f4;
 }
 
 header{
-    background:#003366;
+    background-color:#1f4e79;
     color:white;
     text-align:center;
-    padding:30px;
+    padding:20px;
 }
 
 nav{
-    background:#222;
-}
-
-nav ul{
-    display:flex;
-    list-style:none;
-    justify-content:center;
-    margin:0;
-    padding:0;
-}
-
-nav li{
-    margin:0 15px;
+    background-color:black;
+    padding:10px;
+    text-align:center;
 }
 
 nav a{
     color:white;
     text-decoration:none;
-    padding:15px;
-    display:block;
+    padding:10px;
 }
 
 nav a:hover{
-    background:#0066cc;
+    color:yellow;
 }
 
 main{
-    max-width:1000px;
+    background-color:white;
+    width:80%;
     margin:auto;
-    background:white;
     padding:20px;
 }
 
+img{
+    width:100%;
+}
+
 footer{
-    background:#003366;
+    background-color:#1f4e79;
     color:white;
     text-align:center;
-    padding:15px;
+    padding:10px;
+    margin-top:20px;
 }
-`
