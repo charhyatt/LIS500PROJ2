@@ -42,10 +42,31 @@ img{
 }
 
 /*adding this for the picture of mark dean so its not so big - CH*/
+.hero-photo{
+    float:left;
+    margin:0 30px 15px 0;
+    text-align:center;
+}
+
 .hero-photo img{
     width:250px;
     max-width:100%;
     height:auto;
+    border-radius:6px;
+    display:block;
+}
+
+
+.hero-photo figcaption{
+    font-size:0.9em;
+    color:#555;
+    margin-top:8px;
+    width:250px;
+}
+
+/*added more stuff to try to fix the image - CH*/
+.clear-float{
+    clear:both;
 }
 
 footer{
