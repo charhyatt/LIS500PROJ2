@@ -41,6 +41,13 @@ img{
     width:100%;
 }
 
+/*adding this for the picture of mark dean so its not so big - CH*/
+.hero-photo img{
+    width:250px;
+    max-width:100%;
+    height:auto;
+}
+
 footer{
     background-color:#1f4e79;
     color:white;
