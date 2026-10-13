@@ -134,6 +134,28 @@ main li {
     width: 250px;
 }
 
+/* right aligned bucky image for the homepage */
+.hero-photo-right {
+    float: right;
+    margin: 0 0 15px 30px;
+    text-align: center;
+}
+
+.hero-photo-right img {
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+}
+
+.hero-photo-right figcaption {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 8px;
+    width: 250px;
+}
+
 /* Added more stuff to try to fix the image - CH */
 .clear-float {
     clear: both;
