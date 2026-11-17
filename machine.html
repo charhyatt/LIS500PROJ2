@@ -15,9 +15,8 @@
 <body>
   <header>
     <h1>Our Teachable Machine</h1>
-  
   </header>
-  
+
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
@@ -26,84 +25,114 @@
     <a href="machine.html">Teachable Machine</a>
   </nav>
 
-<main>
-  <h2>Our Machine</h2>
+  <main>
+    <h2 class="page-title">Our Machine</h2>
     <p>Our model is trained to see the difference between a closed fist, an open hand, a peace sign or no hand.
-      Allow camera access, then hold up a closed fist, an open hand, or a peace sign.</p>
-    <div id="canvas-holder"></div>
+      Click "Try This Model" below, allow camera access, then hold up a closed fist, an open hand, or a peace sign.</p>
 
-  <h2>Our Project Statement</h2>
-  <!-- paste statement here -->
-</main>
+    <!-- Button to start the model CH -->
+    <div class="button-group">
+      <button id="start-btn" class="button">Try This Model</button>
+    </div>
 
-<div>Teachable Machine Image Model - p5.js and ml5.js</div>
-<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script>
-<script type="text/javascript">
-  // Classifier Variable
-  let classifier;
-  // Model URL
-  let imageModelURL = './tm-my-image-model/';
-  
-  // Video
-  let video;
-  let flippedVideo;
-  // To store the classification
-  let label = "Loading...";
+    <!-- Canvas holder (hidden until model starts) CH -->
+    <div id="canvas-holder" style="margin-top: 25px;"></div>
 
-  // Load the model first
-  function preload() {
-    classifier = ml5.imageClassifier(imageModelURL + 'model.json');
-  }
+    <h2>Our Project Statement</h2>
+    <!-- paste statement here -->
+  </main>
 
-  function setup() {
-    createCanvas(320, 260);
-    // Create the video
-    video = createCapture(VIDEO);
-    video.size(320, 240);
-    video.hide();
+  <footer>
+    <p>Feedback Forum Project</p>
+  </footer>
 
-    flippedVideo = ml5.flipImage(video);
-    // Start classifying
-    classifyVideo();
-  }
+  <div>Teachable Machine Image Model - p5.js and ml5.js</div>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script>
+  <script type="text/javascript">
+    // Classifier Variable
+    let classifier;
+    // Model URL
+    let imageModelURL = './tm-my-image-model/';
 
-  function draw() {
-    background(0);
-    // Draw the video
-    image(flippedVideo, 0, 0);
+    // Video
+    let video;
+    let flippedVideo;
+    // To store the classification
+    let label = "Loading...";
 
-    // Draw the label
-    fill(255);
-    textSize(16);
-    textAlign(CENTER);
-    text(label, width / 2, height - 4);
-  }
+    // Flag to track whether the model has been started
+    let modelStarted = false;
 
-  // Get a prediction for the current video frame
-  function classifyVideo() {
-    flippedVideo = ml5.flipImage(video)
-    classifier.classify(flippedVideo, gotResult);
-    flippedVideo.remove();
-
-  }
-
-  // When we get a result
-  function gotResult(error, results) {
-    // If there is an error
-    if (error) {
-      console.error(error);
-      return;
+    // Load the model first (this doesn't start the camera)
+    function preload() {
+      classifier = ml5.imageClassifier(imageModelURL + 'model.json');
     }
-    // The results are in an array ordered by confidence.
-    // console.log(results[0]);
-    label = results[0].label;
-    // Classifiy again!
-    classifyVideo();
-  }
-</script>
 
-  
+    function setup() {
+      // Create the canvas but don't start the camera yet
+      let cnv = createCanvas(320, 260);
+      cnv.parent('canvas-holder');
+      // Hide the canvas until the user clicks the button
+      cnv.hide();
 
- </body>
+      // Connect the button
+      document.getElementById('start-btn').addEventListener('click', startModel);
+    }
+
+    function startModel() {
+      // Prevent starting more than once
+      if (modelStarted) return;
+      modelStarted = true;
+
+      // Hide the button now that the model is running
+      document.getElementById('start-btn').style.display = 'none';
+
+      // Show the canvas
+      let cnv = document.querySelector('#canvas-holder canvas');
+      if (cnv) cnv.show();
+
+      // Create the video and start the camera
+      video = createCapture(VIDEO);
+      video.size(320, 240);
+      video.hide();
+
+      flippedVideo = ml5.flipImage(video);
+      // Start classifying
+      classifyVideo();
+    }
+
+    function draw() {
+      if (!modelStarted) return;
+
+      background(0);
+      // Draw the video
+      image(flippedVideo, 0, 0);
+
+      // Draw the label
+      fill(255);
+      textSize(16);
+      textAlign(CENTER);
+      text(label, width / 2, height - 4);
+    }
+
+    // Get a prediction for the current video frame
+    function classifyVideo() {
+      flippedVideo = ml5.flipImage(video);
+      classifier.classify(flippedVideo, gotResult);
+      flippedVideo.remove();
+    }
+
+    // When we get a result
+    function gotResult(error, results) {
+      if (error) {
+        console.error(error);
+        return;
+      }
+      label = results[0].label;
+      classifyVideo();
+    }
+  </script>
+
+</body>
 </html>
