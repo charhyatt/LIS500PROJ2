@@ -180,7 +180,8 @@
     }
     // The results are in an array ordered by confidence.
     // console.log(results[0]);
-    label = results[0].label;
+    // changed certainty to percentages CH
+    label = results[0].label + " (" + (results[0].confidence * 100).toFixed(0) + "%)";
     // Classifiy again!
     classifyVideo();
   }
